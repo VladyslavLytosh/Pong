@@ -7,16 +7,16 @@
 
 void APongGameStateBase::IncrementScore(int32 PlayerNumber)
 {
+	if (!(PlayerNumber == 1 || PlayerNumber == 2)) return;
+		
 	if (HasAuthority())
 	{
 		if (PlayerNumber == 1)
 		{
-			GEngine->AddOnScreenDebugMessage(-1,1,FColor::Red,TEXT("Player 1 Scores"));
 			PlayerOneScore++;
 		}
 		else if (PlayerNumber == 2)
 		{
-			GEngine->AddOnScreenDebugMessage(-1,1,FColor::Yellow,TEXT("Player 2 Scores"));
 			PlayerTwoScore++;
 		}
 	}

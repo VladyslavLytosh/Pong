@@ -25,7 +25,7 @@ private:
 	
 	void Input_Move(const FInputActionValue& InputActionValue);
 
-	UFUNCTION(Server,Unreliable)
-	void Move_Server(FVector Delta);
+	UFUNCTION(Server, Unreliable)
+	void Move_Server(FVector NewLocation);
 
 };

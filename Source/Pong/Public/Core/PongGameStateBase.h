@@ -7,14 +7,21 @@
 #include "Kismet/GameplayStatics.h"
 #include "PongGameStateBase.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnScoreChanged);
 
 UCLASS()
 class PONG_API APongGameStateBase : public AGameStateBase
 {
 	GENERATED_BODY()
+	
 
 public:
 	void IncrementScore(int32 PlayerNumber);
+	
+	FOnScoreChanged OnScoreChanged;
+
+	FORCEINLINE int32 GetPlayerOneScore() const { return PlayerOneScore; };
+	FORCEINLINE int32 GetPlayerTwoScore() const { return PlayerTwoScore; };
 	
 protected:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;

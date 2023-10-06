@@ -18,8 +18,7 @@ public:
 private:
 	UFUNCTION()
 	void OnActorOverlaps(AActor* OverlappedActor, AActor* OtherActor);
-
-private:
+	
 	UPROPERTY(EditAnywhere)
 	int32 PlayerNumber;
 };
