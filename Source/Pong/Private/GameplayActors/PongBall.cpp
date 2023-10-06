@@ -29,18 +29,18 @@ void APongBall::BeginPlay()
 	Restart();
 }
 
-void APongBall::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
-{
-	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
-
-	DOREPLIFETIME(APongBall, MoveVector)
-}
-
 void APongBall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
 	AddActorLocalOffset(MoveVector*BallSpeed*DeltaTime,true);
+}
+
+void APongBall::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(APongBall, MoveVector)
 }
 
 void APongBall::OnBallHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
