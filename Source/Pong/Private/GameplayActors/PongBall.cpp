@@ -18,22 +18,15 @@ APongBall::APongBall()
 	
 	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball Mesh"));
 	BallMesh->SetupAttachment(RootComponent);
-
-	FloatingPawnMovement = CreateDefaultSubobject<UFloatingPawnMovement>(TEXT("FloatingPawnMovement"));
-
 	
 	CapsuleComponent->OnComponentHit.AddDynamic(this, &ThisClass::OnBallHit);
-
 }
 
 void APongBall::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (HasAuthority())
-	{
-		MoveVector = UKismetMathLibrary::RandomUnitVector().GetSafeNormal2D();
-	}
+	
+	Restart();
 }
 
 void APongBall::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -48,7 +41,6 @@ void APongBall::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	AddActorLocalOffset(MoveVector*BallSpeed*DeltaTime,true);
-
 }
 
 void APongBall::OnBallHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
@@ -56,15 +48,16 @@ void APongBall::OnBallHit(UPrimitiveComponent* HitComponent, AActor* OtherActor,
 	if (HasAuthority())
 	{
 		MoveVector = UKismetMathLibrary::GetReflectionVector(MoveVector, Hit.ImpactNormal);
-		GEngine->AddOnScreenDebugMessage(-1,1,FColor::Red,TEXT("Server OnBallHit"));
 	}
 }
 
-void APongBall::MoveBall(float DeltaTime)
+void APongBall::Restart()
 {
-}
-
-void APongBall::MoveBall_Server_Implementation()
-{
+	if (HasAuthority())
+	{
+		SetActorLocation(FVector(0,0,110.f));
+		
+		MoveVector = UKismetMathLibrary::RandomUnitVector().GetSafeNormal2D();
+	}
 }
 

@@ -32,9 +32,6 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = Components)
 	UCapsuleComponent* CapsuleComponent;
 	
-	UPROPERTY(VisibleAnywhere, Category = Components)
-	UFloatingPawnMovement* FloatingPawnMovement;
-
 	UPROPERTY(Replicated)
 	FVector MoveVector;
 	
@@ -44,7 +41,5 @@ private:
 	UFUNCTION()
 	void OnBallHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
-	void MoveBall(float DeltaTime);
-	UFUNCTION(Server, Unreliable)
-	void MoveBall_Server();
+	void Restart();
 };
