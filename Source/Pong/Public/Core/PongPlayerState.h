@@ -11,5 +11,5 @@ UCLASS()
 class PONG_API APongPlayerState : public APlayerState
 {
 	GENERATED_BODY()
-	
+
 };

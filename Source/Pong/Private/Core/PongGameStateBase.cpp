@@ -3,7 +3,21 @@
 
 #include "Core/PongGameStateBase.h"
 
+#include "PongGameModeBase.h"
 #include "Net/UnrealNetwork.h"
+
+
+void APongGameStateBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (HasAuthority())
+	{
+		APongGameModeBase* PongGameModeBase  = Cast<APongGameModeBase>(UGameplayStatics::GetGameMode(this));
+		
+		PongGameModeBase->OnAllPlayersConnects.AddDynamic(this, &ThisClass::OnAllPlayersConnect);
+	}
+}
 
 void APongGameStateBase::IncrementScore(int32 PlayerNumber)
 {
@@ -28,4 +42,16 @@ void APongGameStateBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	
 	DOREPLIFETIME(APongGameStateBase, PlayerOneScore)
 	DOREPLIFETIME(APongGameStateBase, PlayerTwoScore)
+	DOREPLIFETIME(APongGameStateBase, bAllPlayersConnected)
+}
+
+
+void APongGameStateBase::OnRep_AllPlayersConnected()
+{
+	OnAllPlayersConnectedClient.Broadcast();
+}
+
+void APongGameStateBase::OnAllPlayersConnect()
+{
+	bAllPlayersConnected = true;	
 }

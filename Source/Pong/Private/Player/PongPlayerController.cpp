@@ -4,6 +4,8 @@
 #include "Player/PongPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/GameplayStatics.h"
+#include "Player/PlayerPawn.h"
 
 void APongPlayerController::InitializePlayerInput(UInputComponent* PlayerInputComponent)
 {
@@ -26,18 +28,18 @@ void APongPlayerController::InitializePlayerInput(UInputComponent* PlayerInputCo
 
 void APongPlayerController::Input_Move(const FInputActionValue& InputActionValue)
 {
-	APawn* PlayerPawn = GetPawn();
+	APlayerPawn* PlayerPawn = GetPawn<APlayerPawn>();
 
 	const FVector2D Value = InputActionValue.Get<FVector2D>();
 
 	if (Value.X != 0)
 	{
-		PlayerPawn->AddMovementInput(PlayerPawn->GetActorRightVector(),Value.X);
+		PlayerPawn->AddMovementInput(PlayerPawn->GetActorRightVector() * Value.X);
 		Move_Server(PlayerPawn->GetActorLocation());
 	}
 }
 
-void APongPlayerController::Move_Server_Implementation(FVector NewLocation)
+void APongPlayerController::Move_Server_Implementation(const FVector ClientLocationVector)
 {
-	GetPawn()->SetActorLocation(NewLocation,false);
+	GetPawn()->SetActorLocation(ClientLocationVector);
 }

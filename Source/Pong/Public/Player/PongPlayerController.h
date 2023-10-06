@@ -8,6 +8,18 @@
 #include "PongPlayerController.generated.h"
 
 
+USTRUCT()
+struct FMoveInfo
+{
+	GENERATED_BODY()
+
+	FVector MoveVector;
+	FVector Direction;
+	float Scale;
+	float DeltaSeconds;
+	float Speed;
+};
+
 UCLASS()
 class PONG_API APongPlayerController : public APlayerController
 {
@@ -26,6 +38,8 @@ private:
 	void Input_Move(const FInputActionValue& InputActionValue);
 
 	UFUNCTION(Server, Unreliable)
-	void Move_Server(FVector NewLocation);
-
+	void Move_Server(const FVector ClientLocationVector);
+	
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true))
+	float PawnSpeed=500.f;
 };

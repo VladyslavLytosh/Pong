@@ -16,9 +16,19 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category = GameHUD, meta = (AllowPrivateAccess = true))
-	TSubclassOf<UUserWidget> PlayerHUDClass;
+	TSubclassOf<UUserWidget> PlayerHUDWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadOnly,Category = GameHUD, meta = (AllowPrivateAccess = true))
+	TSubclassOf<UUserWidget> WaitingWidgetClass;
 
 private:
 	UPROPERTY()
 	UUserWidget* PlayerHUDWidget;
+	UPROPERTY()
+	UUserWidget* WaitingWidget;
+
+	UFUNCTION()
+	void OnAllPlayersConnectedClient();
+
+	
 };

@@ -4,7 +4,6 @@
 #include "GameplayActors/PongBall.h"
 
 #include "Components/CapsuleComponent.h"
-#include "GameFramework/FloatingPawnMovement.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Net/UnrealNetwork.h"
 
@@ -22,18 +21,12 @@ APongBall::APongBall()
 	CapsuleComponent->OnComponentHit.AddDynamic(this, &ThisClass::OnBallHit);
 }
 
-void APongBall::BeginPlay()
-{
-	Super::BeginPlay();
-	
-	Restart();
-}
 
 void APongBall::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	AddActorLocalOffset(MoveVector*BallSpeed*DeltaTime,true);
+	AddActorLocalOffset(MoveVector * BallSpeed * DeltaTime,true);
 }
 
 void APongBall::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
