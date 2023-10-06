@@ -26,7 +26,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	
 	void Restart();
-	
+
 private:
 	UPROPERTY(VisibleAnywhere, Category = Components)
 	UStaticMeshComponent* BallMesh;
@@ -38,10 +38,8 @@ private:
 	FVector MoveVector;
 	
 	UPROPERTY(EditAnywhere, Category = Movement)
-	float BallSpeed=1500.f;
+	float BallSpeed=1000.f;
 
 	UFUNCTION()
 	void OnBallHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-
-
 };

@@ -3,7 +3,9 @@
 
 #include "GameplayActors/PongGoalTrigger.h"
 
+#include "Core/PongGameStateBase.h"
 #include "GameplayActors/PongBall.h"
+#include "Kismet/GameplayStatics.h"
 
 APongGoalTrigger::APongGoalTrigger()
 {
@@ -14,9 +16,10 @@ void APongGoalTrigger::OnActorOverlaps(AActor* OverlappedActor, AActor* OtherAct
 {
 	if (APongBall* PongBall = Cast<APongBall>(OtherActor))
 	{
-		if (HasAuthority())
-		{
-			PongBall->Restart();
-		}
+		APongGameStateBase* GameState = Cast<APongGameStateBase>(UGameplayStatics::GetGameState(this));
+		if (!GameState) return;
+		
+		GameState->IncrementScore(PlayerNumber);
+		PongBall->Restart();
 	}
 }
