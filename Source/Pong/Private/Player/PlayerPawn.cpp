@@ -6,6 +6,7 @@
 #include "Camera/CameraComponent.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Player/PongPlayerController.h"
 
 APlayerPawn::APlayerPawn()
 {
@@ -22,16 +23,6 @@ APlayerPawn::APlayerPawn()
 
 	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	PawnMesh->SetupAttachment(RootComponent);
-}
-
-void APlayerPawn::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-void APlayerPawn::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 
 }
 
@@ -39,5 +30,9 @@ void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	APongPlayerController* PlayerController =  Cast<APongPlayerController>(Controller);
+	if (!PlayerController) return;
+
+	PlayerController->InitializePlayerInput(PlayerInputComponent);
 }
 

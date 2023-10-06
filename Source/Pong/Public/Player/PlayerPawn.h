@@ -17,13 +17,7 @@ class PONG_API APlayerPawn : public APawn
 
 public:
 	APlayerPawn();
-
-protected:
-	virtual void BeginPlay() override;
-
-public:	
-	virtual void Tick(float DeltaTime) override;
-
+	
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 private:
