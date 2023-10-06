@@ -24,6 +24,8 @@ APlayerPawn::APlayerPawn()
 	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	PawnMesh->SetupAttachment(RootComponent);
 
+	BoxCollision->SetBoxExtent(FVector(14,200,38));
+	BoxCollision->SetCollisionResponseToChannels(ECollisionResponse::ECR_Block);
 }
 
 void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
