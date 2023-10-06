@@ -11,8 +11,9 @@
 APlayerPawn::APlayerPawn()
 {
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
 	
-	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("CapsuleComponent"));
+	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxCollision"));
 	RootComponent = BoxCollision;
 	
 	SpringArmComponent = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArm"));
@@ -24,6 +25,8 @@ APlayerPawn::APlayerPawn()
 	PawnMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	PawnMesh->SetupAttachment(RootComponent);
 
+	BoxCollision->SetBoxExtent(FVector(14,200,38));
+	BoxCollision->SetCollisionResponseToChannels(ECollisionResponse::ECR_Block);
 }
 
 void APlayerPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)

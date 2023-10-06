@@ -39,5 +39,5 @@ void APongPlayerController::Input_Move(const FInputActionValue& InputActionValue
 
 void APongPlayerController::Move_Server_Implementation(FVector NewLocation)
 {
-	GetPawn()->SetActorLocation(NewLocation,true);
+	GetPawn()->SetActorLocation(NewLocation,false);
 }
