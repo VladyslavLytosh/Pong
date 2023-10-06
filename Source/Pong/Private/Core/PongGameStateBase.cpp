@@ -45,10 +45,9 @@ void APongGameStateBase::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& O
 	DOREPLIFETIME(APongGameStateBase, bAllPlayersConnected)
 }
 
-
 void APongGameStateBase::OnRep_AllPlayersConnected()
 {
-	OnAllPlayersConnectedClient.Broadcast();
+	OnAllPlayersConnected_Client.Broadcast();
 }
 
 void APongGameStateBase::OnAllPlayersConnect()

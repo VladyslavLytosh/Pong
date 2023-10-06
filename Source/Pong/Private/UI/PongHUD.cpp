@@ -13,7 +13,7 @@ void APongHUD::BeginPlay()
 	
 	APlayerController* PlayerController = GetOwningPlayerController();
 
-	checkf(PlayerHUDWidgetClass, TEXT("Widgets classes is not setted"))
+	checkf(PlayerHUDWidgetClass && WaitingWidgetClass, TEXT("Widgets classes is not setted"))
 	
 	PlayerHUDWidget = CreateWidget(PlayerController, PlayerHUDWidgetClass);
 	PlayerHUDWidget->AddToViewport();
@@ -24,11 +24,10 @@ void APongHUD::BeginPlay()
 	WaitingWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 
 	APongGameStateBase* GameStateBase =  Cast<APongGameStateBase>(UGameplayStatics::GetGameState(this));
-	GameStateBase->OnAllPlayersConnectedClient.AddDynamic(this,&ThisClass::OnAllPlayersConnectedClient);
-	
+	GameStateBase->OnAllPlayersConnected_Client.AddDynamic(this,&ThisClass::OnAllPlayersConnected_Client);
 }
 
-void APongHUD::OnAllPlayersConnectedClient()
+void APongHUD::OnAllPlayersConnected_Client()
 {
 	PlayerHUDWidget->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
 	WaitingWidget->SetVisibility(ESlateVisibility::Collapsed);

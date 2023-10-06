@@ -8,18 +8,6 @@
 #include "PongPlayerController.generated.h"
 
 
-USTRUCT()
-struct FMoveInfo
-{
-	GENERATED_BODY()
-
-	FVector MoveVector;
-	FVector Direction;
-	float Scale;
-	float DeltaSeconds;
-	float Speed;
-};
-
 UCLASS()
 class PONG_API APongPlayerController : public APlayerController
 {

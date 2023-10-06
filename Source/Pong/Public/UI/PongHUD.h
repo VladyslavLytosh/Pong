@@ -28,7 +28,7 @@ private:
 	UUserWidget* WaitingWidget;
 
 	UFUNCTION()
-	void OnAllPlayersConnectedClient();
+	void OnAllPlayersConnected_Client();
 
 	
 };

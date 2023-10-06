@@ -8,7 +8,7 @@
 #include "PongGameStateBase.generated.h"
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnScoreChanged);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAllPlayersConnectedClient);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnAllPlayersConnected_Client);
 
 UCLASS()
 class PONG_API APongGameStateBase : public AGameStateBase
@@ -16,13 +16,12 @@ class PONG_API APongGameStateBase : public AGameStateBase
 	GENERATED_BODY()
 	
 public:
-	
 	virtual void BeginPlay() override;
 	
 	void IncrementScore(int32 PlayerNumber);
 	
 	FOnScoreChanged OnScoreChanged;
-	FOnAllPlayersConnectedClient OnAllPlayersConnectedClient;
+	FOnAllPlayersConnected_Client OnAllPlayersConnected_Client;
 	
 	FORCEINLINE int32 GetPlayerOneScore() const { return PlayerOneScore; };
 	FORCEINLINE int32 GetPlayerTwoScore() const { return PlayerTwoScore; };

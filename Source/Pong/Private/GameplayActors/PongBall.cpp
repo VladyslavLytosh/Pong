@@ -18,6 +18,7 @@ APongBall::APongBall()
 	BallMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Ball Mesh"));
 	BallMesh->SetupAttachment(RootComponent);
 	
+	check(CapsuleComponent)
 	CapsuleComponent->OnComponentHit.AddDynamic(this, &ThisClass::OnBallHit);
 }
 

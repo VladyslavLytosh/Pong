@@ -4,7 +4,6 @@
 #include "Player/PongPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "Kismet/GameplayStatics.h"
 #include "Player/PlayerPawn.h"
 
 void APongPlayerController::InitializePlayerInput(UInputComponent* PlayerInputComponent)
